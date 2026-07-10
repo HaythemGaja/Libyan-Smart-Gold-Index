@@ -204,98 +204,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Dynamic Mathematical Formulas Card -->
-                <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden">
-                    <h3 class="text-sm font-bold text-gold-400 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-square-root-variable text-gold-400"></i>
-                        <span data-key="formulas_card_title">المعادلات الرياضية المستخدمة</span>
-                    </h3>
-                    <div class="space-y-4 text-xs text-slate-300 leading-relaxed font-mono">
-                        <!-- Step 1 Formula -->
-                        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                            <span class="text-gold-400 font-bold block mb-1 text-[11px]" data-key="formula_step1_title">1. سعر جرام عيار 24 بالدولار ($):</span>
-                            <div class="text-center text-slate-100 font-bold py-1 bg-slate-900/60 rounded my-1 text-[11px]">
-                                Base24_USD = Ounce_Price / 31.1034768
-                            </div>
-                            <div class="text-[10px] text-slate-400 text-center" id="live_step1_calc">
-                                <!-- Computed dynamically -->
-                            </div>
-                        </div>
-
-                        <!-- Step 2 Formula -->
-                        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                            <span class="text-gold-400 font-bold block mb-1 text-[11px]" data-key="formula_step2_title">2. سعر الجرام لعيار مخصص بالدولار ($):</span>
-                            <div class="text-center text-slate-100 font-bold py-1 bg-slate-900/60 rounded my-1 text-[11px]">
-                                Gram_USD = Base24_USD × (Karat / 24)
-                            </div>
-                        </div>
-
-                        <!-- Step 3 Formula -->
-                        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                            <span class="text-gold-400 font-bold block mb-1 text-[11px]" data-key="formula_step3_title">3. سعر جرام عيار مخصص بالدينار الليبي (د.ل):</span>
-                            <div class="text-center text-slate-100 font-bold py-1 bg-slate-900/60 rounded my-1 text-[11px]">
-                                Gram_LYD = (Gram_USD × Parallel_Rate) + Making_Charge
-                            </div>
-                            <div class="text-[10px] text-slate-400 text-center" id="live_step3_calc">
-                                <!-- Computed dynamically -->
-                            </div>
-                        </div>
-
-                        <!-- Step 4 Formula -->
-                        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                            <span class="text-gold-400 font-bold block mb-1 text-[11px]" data-key="formula_step4_title">4. إجمالي القيمة للوزن المستهدف (د.ل):</span>
-                            <div class="text-center text-slate-100 font-bold py-1 bg-slate-900/60 rounded my-1 text-[11px]">
-                                Total_LYD = Gram_LYD × Total_Weight
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Data Source & Transparency Information Panel -->
-                <div class="bg-slate-900/80 border border-slate-800/80 rounded-3xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden">
-                    <h3 class="text-sm font-bold text-gold-400 mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-nodes"></i>
-                        <span data-key="source_info_title">مصادر البيانات والشفافية</span>
-                    </h3>
-                    <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
-                        <p data-key="source_intro">
-                            يتفرد هذا التطبيق بنظام استخبار مالي ذكي يعتمد على جلب البيانات من مصادر حية ومتعددة لتقديم أعلى درجات الدقة والتحليل:
-                        </p>
-                        <div class="border-t border-slate-800 pt-2 space-y-2">
-                            <div class="flex gap-2 items-start">
-                                <span class="text-gold-400 font-bold mt-0.5">•</span>
-                                <p>
-                                    <strong class="text-slate-100" data-key="source_ounce_title">سعر الأونصة العالمي:</strong>
-                                    <span data-key="source_ounce_desc">يتم جلبه عبر الإنترنت، لضمان السعر الفوري لـ (XAU/USD). يمكنك مطابقة السعر ومتابعته يدوياً من المصادر المفتوحة المباشرة التالية:</span>
-                                    <span class="block mt-2 font-semibold flex flex-wrap gap-2 text-[12px]">
-                                        <a href="https://goldprice.org/" target="_blank" class="text-blue-400 hover:text-blue-300 underline underline-offset-4 font-bold inline-flex items-center gap-1.5 bg-blue-900/20 px-3 py-1.5 rounded-lg border border-blue-800/50 transition">
-                                            <i class="fa-solid fa-link"></i> GoldPrice.org
-                                        </a>
-                                        <a href="https://www.kitco.com/charts/gold" target="_blank" class="text-blue-400 hover:text-blue-300 underline underline-offset-4 font-bold inline-flex items-center gap-1.5 bg-blue-900/20 px-3 py-1.5 rounded-lg border border-blue-800/50 transition">
-                                            <i class="fa-solid fa-link"></i> Kitco Gold
-                                        </a>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="flex gap-2 items-start">
-                                <span class="text-gold-400 font-bold mt-0.5">•</span>
-                                <p>
-                                    <strong class="text-slate-100" data-key="source_parallel_title">سعر صرف الموازي:</strong>
-                                    <span data-key="source_parallel_desc">يعتمد على رصد متوسط أسعار الصرف المتداولة داخل أسواق الصاغة (سوق المشير بطرابلس، بنغازي، ومصراتة). لمطابقة أسعار العملات في السوق الموازي والبنك الرسمي، تصفح المصادر التالية:</span>
-                                    <span class="block mt-2 font-semibold flex flex-wrap gap-2 text-[12px]">
-                                        <a href="https://cbl.gov.ly/" target="_blank" class="text-emerald-400 hover:text-emerald-300 underline underline-offset-4 font-bold inline-flex items-center gap-1.5 bg-emerald-900/20 px-3 py-1.5 rounded-lg border border-emerald-800/50 transition">
-                                            <i class="fa-solid fa-link"></i> مصرف ليبيا المركزي
-                                        </a>
-                                        <a href="https://www.eanlibya.com/exchangerate/" target="_blank" class="text-emerald-400 hover:text-emerald-300 underline underline-offset-4 font-bold inline-flex items-center gap-1.5 bg-emerald-900/20 px-3 py-1.5 rounded-lg border border-emerald-800/50 transition">
-                                            <i class="fa-solid fa-link"></i> شبكة عين ليبيا
-                                        </a>
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             <!-- Right Panel: Results & Breakdowns -->
@@ -400,9 +308,15 @@
                         </table>
                     </div>
                 </div>
+            </section>
 
+        </main>
+
+        <!-- Bottom Section: Info, Sources & Formulas (Optimized for Mobile Flow) -->
+        <section class="mt-8 space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Libyan Gold Market Insights & Explanations -->
-                <div class="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 shadow-md">
+                <div class="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 shadow-md h-full">
                     <h3 class="text-md font-bold text-gold-400 mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-circle-info"></i>
                         <span data-key="guide_title">دليلك السريع لسوق الذهب والفضة في ليبيا</span>
@@ -428,9 +342,105 @@
                         </div>
                     </div>
                 </div>
-            </section>
 
-        </main>
+                <!-- Data Source & Transparency Information Panel -->
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-3xl p-6 shadow-xl backdrop-blur-sm relative overflow-hidden h-full">
+                    <h3 class="text-sm font-bold text-gold-400 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-nodes"></i>
+                        <span data-key="source_info_title">مصادر البيانات والشفافية</span>
+                    </h3>
+                    <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+                        <p data-key="source_intro">
+                            يتفرد هذا التطبيق بنظام استخبار مالي ذكي يعتمد على جلب البيانات من مصادر حية ومتعددة لتقديم أعلى درجات الدقة والتحليل:
+                        </p>
+                        <div class="border-t border-slate-800 pt-2 space-y-2">
+                            <div class="flex gap-2 items-start">
+                                <span class="text-gold-400 font-bold mt-0.5">•</span>
+                                <p>
+                                    <strong class="text-slate-100" data-key="source_ounce_title">سعر الأونصة العالمي:</strong>
+                                    <span data-key="source_ounce_desc">يتم جلبه عبر الإنترنت، لضمان السعر الفوري لـ (XAU/USD). يمكنك مطابقة السعر ومتابعته يدوياً من المصادر المفتوحة المباشرة التالية:</span>
+                                    <span class="block mt-2 font-semibold flex flex-wrap gap-2 text-[12px]">
+                                        <a href="https://goldprice.org/" target="_blank" class="text-blue-400 hover:text-blue-300 underline underline-offset-4 font-bold inline-flex items-center gap-1.5 bg-blue-900/20 px-3 py-1.5 rounded-lg border border-blue-800/50 transition">
+                                            <i class="fa-solid fa-link"></i> GoldPrice.org
+                                        </a>
+                                        <a href="https://www.kitco.com/charts/gold" target="_blank" class="text-blue-400 hover:text-blue-300 underline underline-offset-4 font-bold inline-flex items-center gap-1.5 bg-blue-900/20 px-3 py-1.5 rounded-lg border border-blue-800/50 transition">
+                                            <i class="fa-solid fa-link"></i> Kitco Gold
+                                        </a>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="flex gap-2 items-start">
+                                <span class="text-gold-400 font-bold mt-0.5">•</span>
+                                <p>
+                                    <strong class="text-slate-100" data-key="source_parallel_title">سعر صرف الموازي:</strong>
+                                    <span data-key="source_parallel_desc">يعتمد على رصد متوسط أسعار الصرف المتداولة داخل أسواق الصاغة (سوق المشير بطرابلس، بنغازي، ومصراتة). لمطابقة أسعار العملات في السوق الموازي والبنك الرسمي، تصفح المصادر التالية:</span>
+                                    <span class="block mt-2 font-semibold flex flex-wrap gap-2 text-[12px]">
+                                        <a href="https://cbl.gov.ly/" target="_blank" class="text-emerald-400 hover:text-emerald-300 underline underline-offset-4 font-bold inline-flex items-center gap-1.5 bg-emerald-900/20 px-3 py-1.5 rounded-lg border border-emerald-800/50 transition">
+                                            <i class="fa-solid fa-link"></i> مصرف ليبيا المركزي
+                                        </a>
+                                        <a href="https://www.eanlibya.com/exchangerate/" target="_blank" class="text-emerald-400 hover:text-emerald-300 underline underline-offset-4 font-bold inline-flex items-center gap-1.5 bg-emerald-900/20 px-3 py-1.5 rounded-lg border border-emerald-800/50 transition">
+                                            <i class="fa-solid fa-link"></i> شبكة عين ليبيا
+                                        </a>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Mathematical Formulas Card (Collapsible) -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl shadow-xl backdrop-blur-sm relative overflow-hidden">
+                <button onclick="toggleFormulas()" class="w-full text-left rtl:text-right p-6 flex justify-between items-center focus:outline-none hover:bg-slate-800/50 transition duration-300 group">
+                    <h3 class="text-sm font-bold text-gold-400 flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable text-gold-400"></i>
+                        <span data-key="formulas_card_title">المعادلات الرياضية المستخدمة</span>
+                    </h3>
+                    <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition">
+                        <i id="formulasToggleIcon" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </div>
+                </button>
+                <div id="formulasContent" class="hidden px-6 pb-6 space-y-4 text-xs text-slate-300 leading-relaxed font-mono border-t border-slate-800/50 pt-4">
+                    <!-- Step 1 Formula -->
+                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="text-gold-400 font-bold block mb-1 text-[11px]" data-key="formula_step1_title">1. سعر جرام عيار 24 بالدولار ($):</span>
+                        <div class="text-center text-slate-100 font-bold py-1 bg-slate-900/60 rounded my-1 text-[11px]">
+                            Base24_USD = Ounce_Price / 31.1034768
+                        </div>
+                        <div class="text-[10px] text-slate-400 text-center" id="live_step1_calc">
+                            <!-- Computed dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Step 2 Formula -->
+                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="text-gold-400 font-bold block mb-1 text-[11px]" data-key="formula_step2_title">2. سعر الجرام لعيار مخصص بالدولار ($):</span>
+                        <div class="text-center text-slate-100 font-bold py-1 bg-slate-900/60 rounded my-1 text-[11px]">
+                            Gram_USD = Base24_USD × (Karat / 24)
+                        </div>
+                    </div>
+
+                    <!-- Step 3 Formula -->
+                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="text-gold-400 font-bold block mb-1 text-[11px]" data-key="formula_step3_title">3. سعر جرام عيار مخصص بالدينار الليبي (د.ل):</span>
+                        <div class="text-center text-slate-100 font-bold py-1 bg-slate-900/60 rounded my-1 text-[11px]">
+                            Gram_LYD = (Gram_USD × Parallel_Rate) + Making_Charge
+                        </div>
+                        <div class="text-[10px] text-slate-400 text-center" id="live_step3_calc">
+                            <!-- Computed dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Step 4 Formula -->
+                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="text-gold-400 font-bold block mb-1 text-[11px]" data-key="formula_step4_title">4. إجمالي القيمة للوزن المستهدف (د.ل):</span>
+                        <div class="text-center text-slate-100 font-bold py-1 bg-slate-900/60 rounded my-1 text-[11px]">
+                            Total_LYD = Gram_LYD × Total_Weight
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Toast Notification Panel -->
         <div id="toast" class="hidden fixed bottom-5 left-5 right-5 md:right-auto md:max-w-sm bg-slate-900 border border-gold-400 text-slate-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 z-50 animate-bounce">
@@ -565,6 +575,19 @@
                 toast_simulated: "Loaded absolute daily benchmark spot rate. Syncing complete across all devices."
             }
         };
+
+        // Toggle Formulas Card Visibility
+        function toggleFormulas() {
+            const content = document.getElementById('formulasContent');
+            const icon = document.getElementById('formulasToggleIcon');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
 
         // Toggle Language
         function toggleLanguage() {
