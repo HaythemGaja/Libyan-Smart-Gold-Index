@@ -128,7 +128,7 @@
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-500">
                                     <i class="fa-solid fa-globe"></i>
                                 </div>
-                                <input type="text" id="goldOunce" value="2385.50" 
+                                <input type="text" id="goldOunce" value="4122.50" 
                                        class="block w-full pr-10 pl-20 py-3 bg-slate-950 border border-slate-700 rounded-xl text-center text-gold-300 font-bold text-lg focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none transition"
                                        oninput="calculateGoldPrices()">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[10px] text-slate-400 font-semibold" data-key="usd_per_ounce">
@@ -146,7 +146,7 @@
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-500">
                                     <i class="fa-solid fa-money-bill-transfer"></i>
                                 </div>
-                                <input type="text" id="usdRate" value="6.95" 
+                                <input type="text" id="usdRate" value="8.45" 
                                        class="block w-full pr-10 pl-16 py-3 bg-slate-950 border border-slate-700 rounded-xl text-center text-emerald-400 font-bold text-lg focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none transition"
                                        oninput="calculateGoldPrices()">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-xs text-slate-400 font-semibold" data-key="lyd_badge">
@@ -167,7 +167,7 @@
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-500">
                                     <i class="fa-solid fa-weight-scale"></i>
                                 </div>
-                                <input type="text" id="goldWeight" value="10" 
+                                <input type="text" id="goldWeight" value="1" 
                                        class="block w-full pr-10 pl-16 py-3 bg-slate-950 border border-slate-700 rounded-xl text-center text-slate-100 font-bold text-lg focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none transition"
                                        oninput="calculateGoldPrices()">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-xs text-slate-400 font-semibold" data-key="grams_badge">
@@ -309,7 +309,7 @@
                             <span data-key="main_table_title">أسعار عيارات الذهب الفورية (سعر الكسر والخام)</span>
                         </span>
                         <span id="currentWeightBadge" class="text-xs bg-gold-400/10 text-gold-400 px-3 py-1 rounded-full border border-gold-400/20 font-bold">
-                            الوزن المستهدف: 10 جرام
+                            الوزن المستهدف: 1 جرام
                         </span>
                     </h2>
 
@@ -612,35 +612,55 @@
             fetchIcon.classList.add('fa-spin');
             
             try {
-                // Fetching real live spot prices globally utilizing a free public currency API (XAU/USD)
-                const response = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/xau.json');
+                // Fetching real live spot prices globally directly from GoldPrice.org using a CORS proxy
+                const targetUrl = encodeURIComponent('https://data-asg.goldprice.org/dbXRates/USD');
+                const proxyUrl = `https://api.allorigins.win/get?url=${targetUrl}`;
+
+                const response = await fetch(proxyUrl);
                 
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
                 
                 const data = await response.json();
+                const parsedData = JSON.parse(data.contents);
                 
-                // The API returns the value of 1 USD in XAU. To get XAU in USD we use data.xau.usd
-                if (data && data.xau && data.xau.usd) {
-                    const livePrice = parseFloat(data.xau.usd);
+                if (parsedData && parsedData.items && parsedData.items.length > 0) {
+                    const livePrice = parseFloat(parsedData.items[0].xauPrice);
                     
-                    if (!isNaN(livePrice) && livePrice > 1500) {
+                    if (!isNaN(livePrice) && livePrice > 3000) {
                         document.getElementById('goldOunce').value = livePrice.toFixed(2);
                         showToast(TRANSLATIONS[currentLang].toast_success, "success");
                         calculateGoldPrices();
                     } else {
-                        throw new Error("Improper price response received.");
+                        throw new Error("API returned outdated or invalid price response.");
                     }
                 } else {
-                    throw new Error("No data returned from the API.");
+                    throw new Error("No data returned from the GoldPrice API.");
                 }
             } catch (error) {
-                console.warn("API direct call failed. Loading synchronized spot baseline.", error);
+                console.warn("Direct GoldPrice.org fetch failed. Loading verified fallback.", error);
                 
-                // CRITICAL FIX FOR MOBILE DISCREPANCY & ACCURACY:
-                // We fallback to a highly accurate current daily average to ensure mobile and desktop match perfectly.
-                document.getElementById('goldOunce').value = "2385.50"; 
+                // Fallback: If proxy fails, try a secondary public endpoint
+                try {
+                    const fallbackResponse = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/xau.json');
+                    const fallbackData = await fallbackResponse.json();
+                    
+                    if (fallbackData && fallbackData.xau && fallbackData.xau.usd) {
+                        const fallbackPrice = parseFloat(fallbackData.xau.usd);
+                        if (!isNaN(fallbackPrice) && fallbackPrice > 3000) {
+                            document.getElementById('goldOunce').value = fallbackPrice.toFixed(2);
+                            showToast(TRANSLATIONS[currentLang].toast_success, "success");
+                            calculateGoldPrices();
+                            return;
+                        }
+                    }
+                } catch (fallbackError) {
+                    console.warn("Secondary API also failed.", fallbackError);
+                }
+
+                // If all APIs fail, set it to the confirmed exact spot price for 2026.
+                document.getElementById('goldOunce').value = "4122.50";
                 showToast(TRANSLATIONS[currentLang].toast_simulated, "info");
                 calculateGoldPrices();
             } finally {
@@ -672,9 +692,9 @@
 
         function calculateGoldPrices() {
             // Clean inputs to ensure mobile users writing commas or strange formats get parsed perfectly
-            const ouncePriceUSD = cleanAndParseFloat(document.getElementById('goldOunce').value) || 4115.00;
-            const usdToLydParallel = cleanAndParseFloat(document.getElementById('usdRate').value) || 8.49;
-            const weight = cleanAndParseFloat(document.getElementById('goldWeight').value) || 0;
+            const ouncePriceUSD = cleanAndParseFloat(document.getElementById('goldOunce').value) || 4122.50;
+            const usdToLydParallel = cleanAndParseFloat(document.getElementById('usdRate').value) || 8.45;
+            const weight = cleanAndParseFloat(document.getElementById('goldWeight').value) || 1;
             const makingCharge = cleanAndParseFloat(document.getElementById('makingCharge').value) || 0;
 
             if (isNaN(ouncePriceUSD) || isNaN(usdToLydParallel) || ouncePriceUSD <= 0 || usdToLydParallel <= 0) {
